@@ -26,6 +26,7 @@ classic_1 <- ggplot(joy, aes(lat, long, group = long, height = elev)) +
                       rel_min_height = 0.03) + 
   my_theme()
 classic_1
+
 # colourful style
 colour_1 <- ggplot(joy, aes(lat, long, group = long, 
                         height = elev, fill = elev)) +
@@ -36,8 +37,30 @@ colour_1 <- ggplot(joy, aes(lat, long, group = long,
   scale_fill_viridis_c(option = "C") + 
   my_theme(fill = "lightblue")
 colour_1
+
 # save them
 ggsave(here("outputs","classic_1.png"), classic_1, units = "px",
        width = 2500, height = 2500, dpi = 320)
 ggsave(here("outputs","colourful_1.png"), colour_1, units = "px",
+       width = 2500, height = 2500, dpi = 320)
+
+# trying out smooth areas with jagged edges ----
+# likely there is a better way of doing this
+joy_test <- 
+  joy %>%
+  mutate(elev_test = case_when(
+    lat < -9.91 ~ runif(6400, min = 156, max = 1678),
+    lat > -9.79 ~ runif(6400, min = 156, max = 1678),
+    TRUE ~ elev
+  ))
+
+classic_2 <- ggplot(joy_test, aes(lat, long, group = long, height = elev_test)) +
+  geom_density_ridges(stat = "identity",
+                      scale = 8, 
+                      fill = "black",
+                      color = "white",
+                      rel_min_height = 0.03) + 
+  my_theme()
+
+ggsave(here("outputs","classic_2.png"), classic_2, units = "px",
        width = 2500, height = 2500, dpi = 320)

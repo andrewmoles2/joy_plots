@@ -14,7 +14,7 @@ joy_df <- function(dimensions = 43, lat_n = -10, long_n = 10,
   
   final_df <- int_df |>
     dplyr::group_by(long) |>
-    dplyr::summarise(lat = seq(lat_n, (lat_n + lat_dif), length.out = dimensions),
+    dplyr::summarise(lat = lat <- seq(lat_n, (lat_n + lat_dif), length.out = dimensions),
                      elev = rnorm(dimensions, mean = elev_mean, sd = elev_sd)) |>
     dplyr::ungroup()
   
@@ -33,4 +33,10 @@ joy_df <- function(dimensions = 43, lat_n = -10, long_n = 10,
   }
 }
 
-
+# other rand generation for elev data
+# http://uc-r.github.io/generating_random_numbers/
+hist(runif(43, min = 0, max = 1000))
+hist(sample(1:1000, size = 43, replace = T))
+hist(rnorm(43, mean = 1000, sd = 500))
+hist(runif(100, 0, 1000) |> rnorm(500, 100))
+dnorm(1:100)
