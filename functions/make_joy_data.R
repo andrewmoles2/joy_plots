@@ -88,4 +88,68 @@ joy_df_noise <- function(x, seed = 1234,
   return(final_df)
 }
 
+# new version that starts as array -> pivoted long data frame 
+# easier to control
+joy_df_noise_new <- function(columns = 300, rows = 80) {
+  
+  noise_df <- array()
+  
+  for (i in 1:columns) {
+    t <- sample(c("perlin", "simplex", "value", "cubic", "worley"), 1)
+    f <- runif(1, min = 0.01, 0.06)
+    o <- round(runif(1, min = 2, max = 4))
+    n <- make_noise_elev(dimension = rows, seed = i, 
+                         noise_type = t, freq = f, oct = o)
+    noise_df <- cbind(noise_df, n)
+  }
+  
+  noise_df <- as.data.frame(noise_df)
+  noise_df <- noise_df[, -1]
+  colnames(noise_df) <- paste0("V", 1:columns)
+  
+  noise_df <- noise_df %>%
+    mutate(row = row_number()) %>%
+    pivot_longer(-row, names_to = "col", values_to = "height") %>%
+    mutate(
+      col = sub("V", "", col) %>% as.numeric(),
+    )
+  
+  return(noise_df)
+  
+}
+
+# version that uses geo data (just EU for now)
+
+region_data <- function(nuts_id = "UKH12") {
+  # default is set to Cambridgeshire
+  # to find nuts id, do something like
+  # gisco_get_nuts(country = "UK")
+  region <- gisco_get_nuts(nuts_id = nuts_id) %>%
+    st_transform(25830)
+  return(region)
+}
+
+dem_data <- function(region, 
+                     zoom = 7, row_target = 90) {
+  # zoom areas - https://wiki.openstreetmap.org/wiki/Zoom_levels 
+  dem <- elevatr::get_elev_raster(
+    region, z = zoom, clip = "bbox",
+    expand = 10000
+  ) %>%
+    terra::rast() %>%
+    terra::mask(terra::vect(region))
+  names(dem) <- "elev"
+  
+  fact <- round(nrow(dem) / row_target)
+  dem_agg <- aggregate(dem, fact)
+  
+  dem_agg[dem_agg < 0] <- 0
+  dem_agg[is.na(dem_agg)] <- 0
+  dem_df <- as.data.frame(dem_agg, xy = TRUE, na.rm = FALSE)
+  
+  return(dem_df)
+}
+
+
+
 
