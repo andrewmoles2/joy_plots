@@ -7,7 +7,10 @@ A repository for making generative and location based joy plots!
 
 ![Using simplex noise to make elevation, with colours](outputs/simplex_joy_1.png)
 
-![colourful style of joy plot](outputs/colourful_1.png){width='49%'} ![classic style of joy plot](outputs/classic_1.png){width='49%'}
+colourful | classic
+:--------:|:--------:
+![colourful style of joy plot](outputs/colourful_1.png) | ![classic style of joy plot](outputs/classic_1.png)
+
 
 ![Trying to replicate Joy Division album](outputs/classic_2.png)
 
@@ -15,7 +18,10 @@ A repository for making generative and location based joy plots!
 
 Both examples here are of the same place, the UK county of Berkshire. 
 
-![colourful style of joy plot](outputs/berkshire_bw.png){width='49%'} ![classic style of joy plot](outputs/berkshire_colour.png){width='49%'}
+colourful | classic
+:--------:|:--------:
+![colourful style of joy plot](outputs/berkshire_bw.png) | ![classic style of joy plot](outputs/berkshire_colour.png)
+
 
 ## Code examples
 

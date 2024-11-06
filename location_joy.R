@@ -52,16 +52,22 @@ joy_standard(region_data = r, df = d, scale = 25) +
 # e.g. using met brewer - https://www.blakerobertmills.com/my-work/met-brewer
 palette <- met.brewer("Hokusai1", n = 40)
 
-( p1 <- joy_colour(region_data = r, df = d, pal = palette, 
+( 
+  p1 <- joy_colour(region_data = r, df = d, pal = palette, 
            min_height = 0, linewidth = 1.5,
            scale = 25) +
-  my_theme() )
+  theme_void() +
+  my_theme() 
+)
 
 
 # add title to say where this is
-( p2 <- joy_standard(r, d) +
+( 
+  p2 <- joy_standard(r, d) +
   labs(title = "Berkshire") +
-  my_theme(size = 34, font = f1) )
+  theme_void() +
+  my_theme(size = 34, font = f1)
+)
 
 joy_colour(region_data = r, df = d, pal = palette, 
            min_height = 0, linewidth = 1.5,
