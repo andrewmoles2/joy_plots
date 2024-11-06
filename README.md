@@ -6,7 +6,7 @@ A repository for making generative and location based joy plots!
 
 colourful | classic
 :--------:|:--------:
-![Using perlin noise to generate elevation](outputs/perlin_joy_1.png) | ![Using simplex noise to make elevation, with colours](outputs/simplex_joy_1.png)
+![Using simplex noise to make elevation, with colours](outputs/simplex_joy_1.png) | ![Using perlin noise to generate elevation](outputs/perlin_joy_1.png) 
 ![colourful style of joy plot](outputs/colourful_1.png) | ![classic style of joy plot](outputs/classic_1.png)
 ![Trying to replicate Joy Division album](outputs/classic_2.png) |
 
