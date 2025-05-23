@@ -119,13 +119,24 @@ joy_df_noise_new <- function(columns = 300, rows = 80) {
 }
 
 # version that uses geo data (just EU for now)
-
 region_data <- function(nuts_id = "UKH12") {
   # default is set to Cambridgeshire
   # to find nuts id, do something like
   # gisco_get_nuts(country = "UK")
   region <- gisco_get_nuts(nuts_id = nuts_id) %>%
     st_transform(25830)
+  return(region)
+}
+
+australia_region_data <- function(state_name = "New South Wales") {
+  # Get Australian states
+  aus_states <- ne_states(country = "australia", returnclass = "sf")
+  
+  # Filter for the desired state
+  region <- aus_states %>%
+    filter(name == state_name) %>%
+    st_transform(3577) # GDA2020 Australian Albers projection
+  
   return(region)
 }
 

@@ -17,6 +17,8 @@ Both examples here are of the same place, the UK county of Berkshire.
 colourful | classic
 :--------:|:--------:
 ![colourful style of joy plot](outputs/berkshire_bw.png) | ![classic style of joy plot](outputs/berkshire_colour.png)
+:--------:|:--------:
+![Canberra with randomised palette](outputs/canberra_colour.png) |
 
 
 ## Code examples
